@@ -1,0 +1,12 @@
+{
+  "micservices": {
+    "users":{
+      "url": "USERS_M_URL",
+      "methods": ["GET", "POST", "PATCH", "DELETE"]
+    },
+    "auth":{
+      "url": "AUTH_M_URL",
+      "methods": ["POST"]
+    }
+  }
+}
