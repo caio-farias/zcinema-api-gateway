@@ -10,8 +10,8 @@ routes.post(
   '/api/users/', 
   [
     ApiGatewayMiddleware.verifyRequest,
-    UsersMiddleware.setAvatar,
     multer(multerConfig).single('file'),
+    UsersMiddleware.setAvatar,
   ],
   ApiGatewayController.passFoward
 )
