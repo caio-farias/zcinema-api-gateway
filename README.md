@@ -9,7 +9,10 @@ Neste caso, usaremos o [yarn ](https://yarnpkg.com/) como gerenciador de pacotes
 ```
 yarn
 ```
-
+* Em seguida execute:
+```
+yarn create-tmp
+```
 ## Endpoints
 
 ### Usuários
