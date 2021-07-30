@@ -1,6 +1,6 @@
 const express = require('express')
 const routes = express.Router()
-const UserMiddleware = require('./UserMiddleware')
+const UsersMiddleware = require('./UsersMiddleware')
 const ApiGatewayController = require('../../api-gateway/ApiGatewayController')
 const ApiGatewayMiddleware = require('../../api-gateway/ApiGatewayMiddleware')
 const multer = require('multer')
@@ -10,7 +10,7 @@ routes.post(
   '/api/users/', 
   [
     ApiGatewayMiddleware.verifyRequest,
-    UserMiddleware.setAvatar,
+    UsersMiddleware.setAvatar,
     multer(multerConfig).single('file'),
   ],
   ApiGatewayController.passFoward

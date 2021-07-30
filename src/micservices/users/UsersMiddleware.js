@@ -1,3 +1,5 @@
+const { getServerURL } = require('../../utils')
+
 module.exports = {
   setAvatar( req, res, next){
     const { micserviceName } = req.params
