@@ -18,7 +18,7 @@ yarn create-tmp
 ### Usuários
 
 * Cadatrar usuário:
-    * Endpoint (POST): https://zcinema-api-gateway.herokuapp.com/users
+    * Endpoint (POST): https://zcinema-api-gateway.herokuapp.com/api/users
     * Body (Todos abaixo são obrigatórios): 
     ```
     {
@@ -31,10 +31,10 @@ yarn create-tmp
     }
     ```
 * Ler usuário:
-    * Endpoint (GET): https://zcinema-api-gateway.com/users/ID_DO_USUARIO
+    * Endpoint (GET): https://zcinema-api-gateway.com/api/users/ID_DO_USUARIO
 
 * Editar usuário:
-    * Endpoint (PATCH): https://zcinema-api-gateway.herokuapp.com/users/ID_DO_USUARIO
+    * Endpoint (PATCH): https://zcinema-api-gateway.herokuapp.com/api/users/ID_DO_USUARIO
     * Body (campos que se deseja mudar): 
     ```
     {
@@ -42,12 +42,12 @@ yarn create-tmp
     }
     ```
 * Deletar usuário:
-    * Endpoint (DELETE): https://zcinema-api-gateway.herokuapp.com/users/ID_DO_USUARIO
+    * Endpoint (DELETE): https://zcinema-api-gateway.herokuapp.com/api/users/ID_DO_USUARIO
 
 ### Autenticação
 
 * Autenticar:
-    * Endpoint (POST): https://zcinema-api-gateway.herokuapp.com/auth
+    * Endpoint (POST): https://zcinema-api-gateway.herokuapp.com/api/auth
     * Authorization: 'Bearer VALOR_DO_TOKEN' 
     * Body: 
     ```
