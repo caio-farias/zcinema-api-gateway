@@ -1,7 +1,9 @@
 const express = require('express')
 const helmet = require('helmet')
 const corsMiddleware = require('./cors')
-const routes = require('./routes')
+const userRoutes = require('./micservices/users/routes')
+const authRoutes = require('./micservices/auth/routes')
+
 require('dotenv/config')
 
 const app = express()
@@ -16,5 +18,8 @@ app.use((req, res, next) =>{
   next()
 })
 
-app.use(routes)
+app.use(userRoutes)
+app.use(authRoutes)
+
+app.use(express.static('tmp'))
 app.listen(process.env.PORT || 3333)

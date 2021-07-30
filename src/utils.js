@@ -1,22 +1,33 @@
 const { micservices } = require('./registeredMicservices.json')
+require('dotenv/config')
 
 const getMicServiceURL = (micserviceName) => {
   if(!micServiceExists(micserviceName))
     return
 
-  const envVariableName = micservices.auth.url
-  return process.env[envVariableName]
+  const envVariableName = micservices[micserviceName].url
+  return process.env[envVariableName] + `/${micserviceName}`
 }
 
 const micServiceExists = 
   (micserviceName) => Object.keys(micservices).includes(micserviceName)
 
-
 const isMethodSupported = 
   (micserviceName, method) => micservices[micserviceName].methods.includes(method)
+
+const isDevEnviroment = () =>
+  process.env.NODE_ENV === 'development' || process.env.NODE_ENV === undefined
+  
+const getServerURL = () => {
+    const isDev = isDevEnviroment()
+    return isDev ? `http://${process.env.HOST}:${process.env.PORT}`
+      : `https://${process.env.HOST}`
+}
 
 module.exports = {
   getMicServiceURL: getMicServiceURL,
   micServiceExists: micServiceExists,
   isMethodSupported: isMethodSupported,
+  isDevEnviroment: isDevEnviroment,
+  getServerURL: getServerURL
 }
