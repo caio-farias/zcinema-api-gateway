@@ -12,6 +12,7 @@ module.exports = {
       req.body = { user, passwordTry: password }
       next()
     } catch (error) {
+      console.log(error)
       const { message } = error.response.data
       return res.status(400).json({ 
         message : message || "Ocorreu um erro neste microsserviço, tente novamente."

@@ -4,7 +4,8 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon src/server.js",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "create-tmp": "mkdir -p 'tmp/uploads/'"
   },
   "repository": "https://github.com/caio-farias/zcinema-api-gateway.git",
   "author": "Caio Farias <caio4095@gmail.com>",
