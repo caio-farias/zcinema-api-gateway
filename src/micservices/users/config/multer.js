@@ -8,10 +8,12 @@ const allowedMimes = [
 ]
 
 module.exports =  {
-  dest: path.resolve(__dirname,'..', '..' ,'..', '..', 'tmp', 'uploads'),
+  dest: path.resolve(__dirname,'..', '..' ,
+    '..', '..', 'tmp', 'uploads', 'users-avatars'),
   storage: multer.diskStorage({
     destination: (req, file, callback) => {
-      callback(null, path.resolve(__dirname, '..', '..', '..', '..', 'tmp', 'uploads'))
+      callback(null, path.resolve(__dirname, '..', '..', 
+        '..', '..', 'tmp', 'uploads', 'users-avatars'))
     },
     filename: (req, file, callback) => {
      randomBytes(16, (err, hash) =>{
