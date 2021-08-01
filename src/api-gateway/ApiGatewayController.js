@@ -1,18 +1,21 @@
 const axios = require('axios')
 const { getMicServiceURL } = require('../utils')
+const { stringify } = require('querystring')
+const { secret } = require('../micserviceSecret.json')
 
 module.exports = {
   async passFoward (req, res){
     const { micserviceName, reqPath } = req
-    const micserviceUrl = getMicServiceURL(micserviceName) + 
-      `/${reqPath != undefined ? reqPath : ''}`
-
+    const micserviceUrl = getMicServiceURL(micserviceName) 
+     + `${reqPath != undefined ? '/' + reqPath : ''}`
+    const query =  req.query? '?' + stringify(req.query) : ''
+    
     try {
       const micserviceResponse = await axios({
         method: req.method,
-        url: micserviceUrl,
+        url: micserviceUrl + query,
         headers: {
-          'Authorization': !!req.headers.authorization? req.headers.authorization: '',
+          'Authorization': secret,
           'Content-Type': 'application/json',
         },
         data: req.body,
