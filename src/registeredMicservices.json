@@ -7,6 +7,16 @@
     "auth":{
       "url": "AUTH_M_URL",
       "methods": ["POST"]
+    },
+    "movies": {
+      "url": "MOVIES_M_URL",
+      "methods": ["GET", "POST", "PATCH", "DELETE"]
+    },
+    "bookings":{
+      "url": "BOOKINGS_M_URL",
+      "methods": ["GET", "POST", "PATCH", "DELETE"],
+      "redundancy": ["users", "movies"],
+      "redundancy_methods": ["POST", "PATCH", "DELETE"]
     }
   }
 }

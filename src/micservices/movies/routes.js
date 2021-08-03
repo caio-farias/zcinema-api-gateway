@@ -1,33 +1,23 @@
 const express = require('express')
 const routes = express.Router()
-const UsersMiddleware = require('./UsersMiddleware')
+const MoviesMiddleware = require('./MoviesMiddleware')
 const ApiGatewayController = require('../../api-gateway/ApiGatewayController')
 const ApiGatewayMiddleware = require('../../api-gateway/ApiGatewayMiddleware')
 const multer = require('multer')
 const multerConfig = require('./config/multer')
 
 routes.post(
-  '/api/users/', 
+  '/api/movies/', 
   [
     ApiGatewayMiddleware.verifyRequest,
     multer(multerConfig).single('file'),
-    UsersMiddleware.setAvatar,
+    MoviesMiddleware.setBanner,
   ],
   ApiGatewayController.passFoward
 )
 
 routes.get(
-  '/api-gateway/users/with-password', 
-  [
-    ApiGatewayMiddleware.verifyRequest,
-    ApiGatewayMiddleware.verifyTokenExistence,  
-    ApiGatewayMiddleware.verifyTokenValue
-  ],
-  ApiGatewayController.passFoward
-)
-
-routes.get(
-  '/api/users/', 
+  '/api/movies', 
   [
     ApiGatewayMiddleware.verifyRequest,
   ],
@@ -35,31 +25,25 @@ routes.get(
 )
 
 routes.get(
-  '/api/users/:id', 
+  '/api/movies/:id', 
   [
     ApiGatewayMiddleware.verifyRequest,
-    ApiGatewayMiddleware.verifyTokenExistence,  
-    ApiGatewayMiddleware.verifyTokenValue
   ],
   ApiGatewayController.passFoward
 )
 
 routes.patch(
-  '/api/users/:id', 
+  '/api/movies/:id', 
   [
     ApiGatewayMiddleware.verifyRequest,
-    // ApiGatewayMiddleware.verifyTokenExistence,  
-    // ApiGatewayMiddleware.verifyTokenValue
   ],
   ApiGatewayController.passFoward
 )
 
 routes.delete(
-  '/api/users/:id', 
+  '/api/movies/:id', 
   [
     ApiGatewayMiddleware.verifyRequest,
-    // ApiGatewayMiddleware.verifyTokenExistence,  
-    // ApiGatewayMiddleware.verifyTokenValue
   ],
   ApiGatewayController.passFoward
 )

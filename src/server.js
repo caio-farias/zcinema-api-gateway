@@ -3,6 +3,8 @@ const helmet = require('helmet')
 const corsMiddleware = require('./cors')
 const userRoutes = require('./micservices/users/routes')
 const authRoutes = require('./micservices/auth/routes')
+const moviesRoutes = require('./micservices/movies/routes')
+const bookingsRoutes = require('./micservices/bookings/routes')
 
 require('dotenv/config')
 
@@ -20,6 +22,8 @@ app.use((req, res, next) =>{
 
 app.use(userRoutes)
 app.use(authRoutes)
+app.use(moviesRoutes)
+app.use(bookingsRoutes)
 
 app.use(express.static('tmp'))
 app.listen(process.env.PORT || 3333)
