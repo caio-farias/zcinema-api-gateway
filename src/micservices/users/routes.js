@@ -48,8 +48,8 @@ routes.patch(
   '/api/users/:id', 
   [
     ApiGatewayMiddleware.verifyRequest,
-    ApiGatewayMiddleware.verifyTokenExistence,  
-    ApiGatewayMiddleware.verifyTokenValue
+    // ApiGatewayMiddleware.verifyTokenExistence,  
+    // ApiGatewayMiddleware.verifyTokenValue
   ],
   ApiGatewayController.passFoward
 )
@@ -58,8 +58,8 @@ routes.delete(
   '/api/users/:id', 
   [
     ApiGatewayMiddleware.verifyRequest,
-    ApiGatewayMiddleware.verifyTokenExistence,  
-    ApiGatewayMiddleware.verifyTokenValue
+    // ApiGatewayMiddleware.verifyTokenExistence,  
+    // ApiGatewayMiddleware.verifyTokenValue
   ],
   ApiGatewayController.passFoward
 )
