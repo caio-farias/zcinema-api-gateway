@@ -5,7 +5,7 @@ module.exports = {
   verifyRequest(req, res, next){
     const url = req.path.split('/')
     const [ micserviceName ] = url.slice(2,3)
-    const [ reqPath ]  =  url.slice(3, url.length)
+    const reqPath  =  url.slice(3, url.length).join('/')
     req.micserviceName = micserviceName
     req.reqPath = reqPath
     const method = req.method
