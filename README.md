@@ -6,13 +6,13 @@
 Neste caso, usaremos o [yarn ](https://yarnpkg.com/) como gerenciador de pacotes do Node.js. Estamos assumindo <br/> que o Postgres esteja ativo na porta 5432 da máquina local ou container (Docker).
 ### Passo a passo
 * No diretório raiz do projeto execute:
-```
+`
 yarn
-```
+`
 * Em seguida execute:
-```
+`
 yarn create-tmp
-```
+`
 ## Endpoints
 
 ### Usuários
@@ -20,7 +20,7 @@ yarn create-tmp
 * Cadatrar usuário:
     * Endpoint (POST): https://zcinema-api-gateway.herokuapp.com/api/users
     * Body (Todos abaixo são obrigatórios): 
-    ```
+```
     {
         "first_name": "Caio",
         "last_name": "FARIAS",
@@ -29,18 +29,18 @@ yarn create-tmp
         "email": "CAIO@email.com",
         "file": ARQUIVO DE IMAGEM.png/.jpeg/.jpg
     }
-    ```
+```
 * Ler usuário:
     * Endpoint (GET): https://zcinema-api-gateway.com/api/users/ID_DO_USUARIO
 
 * Editar usuário:
     * Endpoint (PATCH): https://zcinema-api-gateway.herokuapp.com/api/users/ID_DO_USUARIO
     * Body (campos que se deseja mudar): 
-    ```
+```
     {
 	    "email": "caio@email.com"
     }
-    ```
+```
 * Deletar usuário:
     * Endpoint (DELETE): https://zcinema-api-gateway.herokuapp.com/api/users/ID_DO_USUARIO
 
@@ -50,18 +50,18 @@ yarn create-tmp
     * Endpoint (POST): https://zcinema-api-gateway.herokuapp.com/api/auth
     * Authorization: 'Bearer VALOR_DO_TOKEN' 
     * Body: 
-    ```
+```
     {
        "email": "CAIO@email.com",
        "password": "123456"
     }
-    ```
+```
 ### Filmes
 
 * Cadatrar de filme:
     * Endpoint (POST): https://zcinema-api-gateway.herokuapp.com/api/movies
     * Body (Todos abaixo são obrigatórios): 
-    ```
+```
 	{
 		"title": "Nome do filme",
 		"description": "descrição",
@@ -71,14 +71,14 @@ yarn create-tmp
 		"schedules": ["18:30","23:30"],
 		"file": ARQUIVO DE IMAGEM.png/.jpeg/.jpg
  	}
-    ```
+```
 * Ler filme:
     * Endpoint (GET): https://zcinema-api-gateway.com/api/movies/ID_DO_FILME
 
 * Ler todos os filmes:
     * Endpoint (GET): https://zcinema-api-gateway.com/api/movies?title={TITULO_DO_FILME}&page=0&limit={QUANTIDADE_DE_FILMES}
     * Resposta:
-    ```
+```
 	    {
 	  "count": QUANTIDADE_DE_FILMES,
 	  "previous": "ENDPOINT_PARA_FILMES_ANTERIORES",
@@ -93,24 +93,24 @@ yarn create-tmp
 	      "end_date": "2021-08-04",
 	      "banner": "https://zcinema-api-gateway.herokuapp.com/uploads/movie-banners/1627786721407e58d0a44bbed89336e8cbabf83116090inception.jpeg",
 	      "sessions": [
-		"18:30",
-		"23:30"
+					"18:30",
+					"23:30"
 	      ],
 	      "createdAt": "2021-08-01T02:58:41.729Z",
 	      "updatedAt": "2021-08-01T02:58:41.729Z"
 	    }
 	  ]
 	}
-    ```
+```
 
 * Editar usuário:
     * Endpoint (PATCH): https://zcinema-api-gateway.herokuapp.com/api/movies/ID_DO_FILME
     * Body (campos que se deseja mudar): 
-    ```
+```
     {
 	    "title": "FILME TESTE"
     }
-    ```
+```
 * Deletar usuário:
     * Endpoint (DELETE): https://zcinema-api-gateway.herokuapp.com/api/movies/ID_DO_FILME
 
@@ -123,41 +123,41 @@ yarn create-tmp
 	{
 		"sessions": [
 			{
-			"id": 1,
-			"movie_title": "Inception",
-			"description": "A DEFINIR",
-			"date": "2021-08-02",
-			"schedule": "18:30",
-			"price": 19.9,
-			"session_watchers_id": [],
-			"available_seats": [
-				"A1",
-				"A2",
-				"A3",
-				"A4",
-				"A5",
-				"A6",
-				"B1",
-				"B2",
-				"B3",
-				"B4",
-				"B5",
-				"B6",
-				"C1",
-				"C2",
-				"C3",
-				"C4",
-				"C5",
-				"C6"
-			],
-			"reserved_seats": [],
-			"sold_seats": [],
-			"createdAt": "2021-08-03T17:43:06.379Z",
-			"updatedAt": "2021-08-03T17:43:06.379Z",
-			"movie_id": 1
-		},
-  ]
-}
+				"id": 1,
+				"movie_title": "Inception",
+				"description": "A DEFINIR",
+				"date": "2021-08-02",
+				"schedule": "18:30",
+				"price": 19.9,
+				"session_watchers_id": [],
+				"available_seats": [
+					"A1",
+					"A2",
+					"A3",
+					"A4",
+					"A5",
+					"A6",
+					"B1",
+					"B2",
+					"B3",
+					"B4",
+					"B5",
+					"B6",
+					"C1",
+					"C2",
+					"C3",
+					"C4",
+					"C5",
+					"C6"
+				],
+				"reserved_seats": [],
+				"sold_seats": [],
+				"createdAt": "2021-08-03T17:43:06.379Z",
+				"updatedAt": "2021-08-03T17:43:06.379Z",
+				"movie_id": 1
+			},
+		]
+	}
 ```
 
 ### Reservas
@@ -177,9 +177,13 @@ yarn create-tmp
 * Ler uma reserva de usuário:
 	* Endpoint (GET): https://zcinema-api-gateway.com/api/bookings/ID_DO_USUARIO/ID_DA_SESSÂO
 
-* Editar reserva:
+* Editar reserva de usuario:
 	* Endpoint (PATCH):  https://zcinema-api-gateway.com/api/bookings/ID_DO_USUARIO/ID_DA_SESSÂO
-
-* Deletar reserva:
+	* Body:
+```
+	{
+		status: "CANCELED"
+	}
+```
+* Deletar reserva de usuario:
 	* Endpoint (DELETE): https://zcinema-api-gateway.com/api/bookings/ID_DO_USUARIO/ID_DA_SESSÂO
-
