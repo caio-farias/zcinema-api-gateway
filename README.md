@@ -113,3 +113,73 @@ yarn create-tmp
     ```
 * Deletar usuário:
     * Endpoint (DELETE): https://zcinema-api-gateway.herokuapp.com/api/movies/ID_DO_FILME
+
+### Sessões
+
+* Ler reserva por data (GET):
+	* Endpoint: https://zcinema-api-gateway.herokuapp.com/api/bookings/sessions?date=DATA&movie_title=TITULO_DO_FILME&schedule=HORARIO
+	* Resposta:
+	```
+	{
+		"sessions": [
+			{
+			"id": 1,
+			"movie_title": "Inception",
+			"description": "A DEFINIR",
+			"date": "2021-08-02",
+			"schedule": "18:30",
+			"price": 19.9,
+			"session_watchers_id": [],
+			"available_seats": [
+				"A1",
+				"A2",
+				"A3",
+				"A4",
+				"A5",
+				"A6",
+				"B1",
+				"B2",
+				"B3",
+				"B4",
+				"B5",
+				"B6",
+				"C1",
+				"C2",
+				"C3",
+				"C4",
+				"C5",
+				"C6"
+			],
+			"reserved_seats": [],
+			"sold_seats": [],
+			"createdAt": "2021-08-03T17:43:06.379Z",
+			"updatedAt": "2021-08-03T17:43:06.379Z",
+			"movie_id": 1
+		},
+  ]
+}
+
+	
+### Reservas
+* Cadastrar Reserva
+ * Endpoint (POST):  https://zcinema-api-gateway.com/api/bookings
+ * Body:
+ ```
+ 	{
+		"seat": "A3",
+		"session_date": "2021-08-03",
+		"type": "Inteira"
+	}
+ ```
+* Ler todas as reservas:
+	* Endpoint (GET): https://zcinema-api-gateway.com/api/bookings?data=DATA_DA_SESSAO&page=0&limit=QUANTIDADE_DE_SESSOES
+	 
+* Ler uma reserva de usuário:
+	* Endpoint (GET): https://zcinema-api-gateway.com/api/bookings/ID_DO_USUARIO/ID_DA_SESSÂO
+
+* Editar reserva:
+	* Endpoint (PATCH):  https://zcinema-api-gateway.com/api/bookings/ID_DO_USUARIO/ID_DA_SESSÂO
+
+* Deletar reserva:
+	* Endpoint (DELETE): https://zcinema-api-gateway.com/api/bookings/ID_DO_USUARIO/ID_DA_SESSÂO
+
