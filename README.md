@@ -119,7 +119,7 @@ yarn create-tmp
 * Ler reserva por data (GET):
 	* Endpoint: https://zcinema-api-gateway.herokuapp.com/api/bookings/sessions?date=DATA&movie_title=TITULO_DO_FILME&schedule=HORARIO
 	* Resposta:
-	```
+```
 	{
 		"sessions": [
 			{
@@ -158,19 +158,19 @@ yarn create-tmp
 		},
   ]
 }
+```
 
-	
 ### Reservas
 * Cadastrar Reserva
- * Endpoint (POST):  https://zcinema-api-gateway.com/api/bookings
- * Body:
- ```
- 	{
+	* Endpoint (POST):  https://zcinema-api-gateway.com/api/bookings
+	* Body:
+```
+	{
 		"seat": "A3",
 		"session_date": "2021-08-03",
 		"type": "Inteira"
 	}
- ```
+```
 * Ler todas as reservas:
 	* Endpoint (GET): https://zcinema-api-gateway.com/api/bookings?data=DATA_DA_SESSAO&page=0&limit=QUANTIDADE_DE_SESSOES
 	 
