@@ -66,8 +66,8 @@ yarn create-tmp
 		"title": "Nome do filme",
 		"description": "descrição",
 		"trailer": "link",
-		"start_date": "data de inicio de exibição",
-		"end_date": "data de fim de exibição",
+		"start_date": "data de inicio de exibição (YYYY-MM-DD)",
+		"end_date": "data de fim de exibição (YYYY-MM-DD)",
 		"schedules": ["18:30","23:30"],
 		"file": ARQUIVO DE IMAGEM.png/.jpeg/.jpg
  	}
@@ -89,8 +89,8 @@ yarn create-tmp
 	      "title": "Inception",
 	      "description": "descrição",
 	      "trailer": "https://www.youtube.com/watch?v=8hP9D6kZseM",
-	      "start_date": "01/08/2021",
-	      "end_date": "09/11/2021",
+	      "start_date": "2021-08-03",
+	      "end_date": "2021-08-04",
 	      "banner": "https://zcinema-api-gateway.herokuapp.com/uploads/movie-banners/1627786721407e58d0a44bbed89336e8cbabf83116090inception.jpeg",
 	      "sessions": [
 		"18:30",
