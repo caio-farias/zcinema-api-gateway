@@ -72,6 +72,7 @@ const applyRedundancy = async (micserviceName, redundancyService, req, res) => {
   const micserviceUrl = getMicServiceURL(redundancyService)
     + `${reqPath != undefined ? `/${micserviceName}/` + reqPath : `/${micserviceName}`}`
   const query =  Object.keys(req.query).length > 0 ? ('?' + stringify(req.query)) : ''
+
   try {
 
     if(micserviceName == 'users'){
@@ -81,8 +82,8 @@ const applyRedundancy = async (micserviceName, redundancyService, req, res) => {
       delete req.body.banner
       delete req.body.trailer
     }
-    console.log(micserviceUrl)
-    const micserviceResponse = await axios({
+
+    await axios({
       method: req.method,
       url: micserviceUrl + query,
       headers: {
@@ -92,10 +93,8 @@ const applyRedundancy = async (micserviceName, redundancyService, req, res) => {
       data: req.body,
       timeout: 3000,
     })
-    const body = micserviceResponse.data
-    console.log(body) 
+
   } catch (error) {
-    console.log(error)
     const { message } = error.response.data || undefined
     return res.status(400).json({ 
       message : message || "Ocorreu um erro neste microsserviço, tente novamente."
