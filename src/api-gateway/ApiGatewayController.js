@@ -2,12 +2,25 @@ const axios = require('axios')
 const { getMicServiceURL, isRedundancyMethod, shouldApplyRedundancy } = require('../utils')
 const { stringify } = require('querystring')
 const { secret } = require('../micserviceSecret.json')
+const axiosRetry = require('axios-retry')
+
+axiosRetry(axios, {
+  retries: 3,
+  retryDelay: (retryCount) => {
+    console.log(`retry attempt: ${retryCount}`);
+    return retryCount * 2000;
+  },
+  retryCondition: (error) => {
+    return error.response.status === 503;
+  },
+})
 
 const applyRedundancy = async (micserviceName, redundancyService, req, res) => {
   const { reqPath } = req
   const micserviceUrl = getMicServiceURL(redundancyService)
     + `${reqPath != undefined ? `/${micserviceName}/` + reqPath : `/${micserviceName}`}`
   const query =  Object.keys(req.query).length > 0 ? ('?' + stringify(req.query)) : ''
+
   try {
 
     if(micserviceName == 'users'){
@@ -17,8 +30,8 @@ const applyRedundancy = async (micserviceName, redundancyService, req, res) => {
       delete req.body.banner
       delete req.body.trailer
     }
-    console.log(micserviceUrl)
-    const micserviceResponse = await axios({
+
+    await axios({
       method: req.method,
       url: micserviceUrl + query,
       headers: {
@@ -28,10 +41,8 @@ const applyRedundancy = async (micserviceName, redundancyService, req, res) => {
       data: req.body,
       timeout: 3000,
     })
-    const body = micserviceResponse.data
-    console.log(body) 
+
   } catch (error) {
-    console.log(error)
     const { message } = error.response.data || undefined
     return res.status(400).json({ 
       message : message || "Ocorreu um erro neste microsserviço, tente novamente."
@@ -44,7 +55,6 @@ module.exports = {
     const { micserviceName, reqPath } = req
     const micserviceUrl = getMicServiceURL(micserviceName) 
      + `${reqPath != undefined ? '/' + reqPath : ''}`
-    console.log(reqPath)
     const query =  Object.keys(req.query).length > 0  ? ('?' + stringify(req.query)) : ''
     
     try {
@@ -71,7 +81,6 @@ module.exports = {
 
       return res.json({ ...body })
     } catch (error) {
-      // console.log(error)
       const { message } = error.response.data || undefined
       return res.status(400).json({ 
         message : message || "Ocorreu um erro neste microsserviço, tente novamente."
