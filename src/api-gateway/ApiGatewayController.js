@@ -3,7 +3,6 @@ const { getMicServiceURL, isRedundancyMethod, shouldApplyRedundancy } = require(
 const { stringify } = require('querystring')
 const { secret } = require('../micserviceSecret.json')
 const axiosRetry = require('axios-retry')
-const ping = require('ping');
 
 const applyRedundancy = async (micserviceName, redundancyService, redundancyId, req, res) => {
   const { reqPath } = req
@@ -122,10 +121,12 @@ const  testEndpoints = async(micserviceName, req, res) => {
     shouldApplyRedundancy('bookings', micserviceName)
     )
       hosts.push(getMicServiceURL('bookings'))
-
-  for(let host of hosts){
-    let pingRes = await ping.promise.probe(host);
-    console.log(pingRes);
+  try {
+    for(let host of hosts){
+      let res = await axios.get(host, { timeout: 5000 });
+    }    
+  } catch (error) {
+    console.log('VERFYING >> ', error) 
   }
 }
 
