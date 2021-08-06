@@ -4,17 +4,6 @@ const { stringify } = require('querystring')
 const { secret } = require('../micserviceSecret.json')
 const axiosRetry = require('axios-retry')
 
-axiosRetry(axios, {
-  retries: 3,
-  retryDelay: (retryCount) => {
-    console.log(`retry attempt: ${retryCount}`);
-    return retryCount * 2000;
-  },
-  retryCondition: (error) => {
-    return error.response.status === 503;
-  },
-})
-
 const applyRedundancy = async (micserviceName, redundancyService, req, res) => {
   const { reqPath } = req
   const micserviceUrl = getMicServiceURL(redundancyService)
@@ -39,7 +28,7 @@ const applyRedundancy = async (micserviceName, redundancyService, req, res) => {
         'Content-Type': 'application/json',
       },
       data: req.body,
-      timeout: 3000,
+      timeout: 2,
     })
 
   } catch (error) {
@@ -66,13 +55,12 @@ module.exports = {
           'Content-Type': 'application/json',
         },
         data: req.body,
-        timeout: 3000,
-        rejectUnauthorized: false
+        timeout: 1,
       })
-      
+
       const body = micserviceResponse.data
 
-      if( 
+      if(
         isRedundancyMethod('bookings', req.method) &&
         shouldApplyRedundancy('bookings', micserviceName)
         ){
