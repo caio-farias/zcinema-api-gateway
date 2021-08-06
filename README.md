@@ -162,7 +162,7 @@ yarn create-tmp
 
 ### Reservas
 * Cadastrar Reserva
-	* Endpoint (POST):  https://zcinema-api-gateway.com/api/bookings
+	* Endpoint (POST):  https://zcinema-api-gateway.com/api/bookings/ID_DO_USUARIO/ID_DA_SESSAO
 	* Body:
 ```
 	{
