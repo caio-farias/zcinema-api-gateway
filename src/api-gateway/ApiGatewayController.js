@@ -11,7 +11,6 @@ const applyRedundancy = async (micserviceName, redundancyService, redundancyId, 
   const query =  Object.keys(req.query).length > 0 ? ('?' + stringify(req.query)) : ''
 
   try {
-
     req.body.id = redundancyId
     if(micserviceName == 'users'){
       delete req.body.password
