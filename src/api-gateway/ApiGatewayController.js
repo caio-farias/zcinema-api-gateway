@@ -51,7 +51,7 @@ const applyRedundancy = async (micserviceName, redundancyService, redundancyId, 
   }
 }
 
-const  testEndpoints = async(micserviceName, req, res) => {
+const testEndpoints = async(micserviceName, req, res) => {
   const hosts = [getMicServiceURL(micserviceName)]
   if(
     isRedundancyMethod('bookings', req.method) &&
