@@ -83,6 +83,17 @@ const applyRedundancy = async (micserviceName, redundancyService, req, res) => {
       delete req.body.trailer
     }
 
+    axiosRetry(axios, {
+      retries: 3,
+      retryDelay: (retryCount) => {
+        console.log(`retry attempt: ${retryCount}`);
+        return retryCount * 2000;
+      },
+      retryCondition: (error) => {
+        return error.response.status === 503;
+      },
+    })
+    
     await axios({
       method: req.method,
       url: micserviceUrl + query,
@@ -91,7 +102,7 @@ const applyRedundancy = async (micserviceName, redundancyService, req, res) => {
         'Content-Type': 'application/json',
       },
       data: req.body,
-      timeout: 2,
+      timeout: 5000,
     })
 
   } catch (error) {
