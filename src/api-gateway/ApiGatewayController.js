@@ -1,4 +1,4 @@
-const axios = require('axios')
+const axios = require('axios').create()
 const { getMicServiceURL, isRedundancyMethod, shouldApplyRedundancy } = require('../utils')
 const { stringify } = require('querystring')
 const { secret } = require('../micserviceSecret.json')
@@ -20,6 +20,17 @@ const applyRedundancy = async (micserviceName, redundancyService, req, res) => {
       delete req.body.trailer
     }
 
+    axiosRetry(axios, {
+      retries: 3,
+      retryDelay: (retryCount) => {
+        console.log(`retry attempt: ${retryCount}`);
+        return retryCount * 2000;
+      },
+      retryCondition: (error) => {
+        return error.response.status === 503;
+      },
+    })
+    
     await axios({
       method: req.method,
       url: micserviceUrl + query,
@@ -28,7 +39,7 @@ const applyRedundancy = async (micserviceName, redundancyService, req, res) => {
         'Content-Type': 'application/json',
       },
       data: req.body,
-      timeout: 2,
+      timeout: 5000,
     })
 
   } catch (error) {
@@ -55,8 +66,11 @@ module.exports = {
           'Content-Type': 'application/json',
         },
         data: req.body,
-        timeout: 1,
+        timeout: 1000,
       })
+
+      if(micserviceResponse.data == undefined)
+        return res.status(503).json({ message: "Heroku botou API Gateway para dormir"})
 
       const body = micserviceResponse.data
 
