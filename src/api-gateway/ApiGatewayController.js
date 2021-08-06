@@ -91,7 +91,7 @@ const applyRedundancy = async (micserviceName, redundancyService, req, res) => {
         'Content-Type': 'application/json',
       },
       data: req.body,
-      timeout: 3000,
+      timeout: 2,
     })
 
   } catch (error) {
