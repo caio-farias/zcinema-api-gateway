@@ -3,6 +3,7 @@ const { getMicServiceURL, isRedundancyMethod, shouldApplyRedundancy } = require(
 const { stringify } = require('querystring')
 const { secret } = require('../micserviceSecret.json')
 const axiosRetry = require('axios-retry')
+const ping = require('ping');
 
 const applyRedundancy = async (micserviceName, redundancyService, redundancyId, req, res) => {
   const { reqPath } = req
@@ -75,6 +76,7 @@ const applyRedundancy = async (micserviceName, redundancyService, req, res) => {
 
   try {
 
+    req.body.id = redundancyId
     if(micserviceName == 'users'){
       delete req.body.password
       delete req.body.avatar
@@ -110,6 +112,20 @@ const applyRedundancy = async (micserviceName, redundancyService, req, res) => {
     return res.status(400).json({ 
       message : message || "Ocorreu um erro neste microsserviço, tente novamente."
     })
+  }
+}
+
+const  testEndpoints = async(micserviceName, req, res) => {
+  const hosts = [getMicServiceURL(micserviceName)]
+  if(
+    isRedundancyMethod('bookings', req.method) &&
+    shouldApplyRedundancy('bookings', micserviceName)
+    )
+      hosts.push(getMicServiceURL('bookings'))
+
+  for(let host of hosts){
+    let pingRes = await ping.promise.probe(host);
+    console.log(pingRes);
   }
 }
 
@@ -160,5 +176,6 @@ module.exports = {
       })
     }
   },
+
 }
 
