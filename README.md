@@ -173,7 +173,8 @@ yarn create-tmp
 ```
 * Ler todas as reservas:
 	* Endpoint (GET): https://zcinema-api-gateway.com/api/bookings?data=DATA_DA_SESSAO&page=0&limit=QUANTIDADE_DE_SESSOES
-	 
+* Ler todas as reservas/sessões de um usuário: 
+	* Endpoint (GET): https://zcinema-api-gateway.com/api/bookings/sessions/ID_DO_USUARIO
 * Ler uma reserva de usuário:
 	* Endpoint (GET): https://zcinema-api-gateway.com/api/bookings/ID_DO_USUARIO/ID_DA_SESSÂO
 
