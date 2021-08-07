@@ -115,8 +115,10 @@ yarn create-tmp
     * Endpoint (DELETE): https://zcinema-api-gateway.herokuapp.com/api/movies/ID_DO_FILME
 
 ### Sessões
-
-* Ler reserva por data (GET):
+* Ler todas as sessões (GET):
+	* Endpoint: https://zcinema-api-gateway.herokuapp.com/api/bookings/sessions/all
+	
+* Ler todas as sessões por data (GET):
 	* Endpoint: https://zcinema-api-gateway.herokuapp.com/api/bookings/sessions?date=DATA&movie_title=TITULO_DO_FILME&schedule=HORARIO
 	* Resposta:
 ```
