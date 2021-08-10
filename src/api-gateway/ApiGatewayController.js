@@ -3,7 +3,6 @@ const { getMicServiceURL, isRedundancyMethod, shouldApplyRedundancy } = require(
 const { stringify } = require('querystring')
 const { secret } = require('../micserviceSecret.json')
 const axiosRetry = require('axios-retry')
-const ping = require('ping');
 
 const applyRedundancy = async (micserviceName, redundancyService, redundancyId, req, res) => {
   const { reqPath } = req
