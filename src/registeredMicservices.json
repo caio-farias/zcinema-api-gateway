@@ -17,6 +17,12 @@
       "methods": ["GET", "POST", "PATCH", "DELETE"],
       "redundancy": ["users", "movies"],
       "redundancy_methods": ["POST", "PATCH", "DELETE"]
+    },
+    "sales":{
+      "url": "SALES_M_URL",
+      "methods": ["GET", "POST", "PATCH", "DELETE"],
+      "redundancy": ["users"],
+      "redundancy_methods": ["POST", "PATCH", "DELETE"]
     }
   }
 }
