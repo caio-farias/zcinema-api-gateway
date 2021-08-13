@@ -194,7 +194,14 @@ yarn create-tmp
 ### Vendas
 * Cadastrar cartão de um usuário:
 	* Endpoint (POST): https://zcinema-sales-microservice.herokuapp.com/api/sales/cards/ID_DO_USUARIO
-
+	* Body:
+```
+{
+  "number": "1235 1234 1234 1234",
+  "secret": 123,
+  "card_banner": "VISA"
+}
+```
 * Ler cartões de um usuário:
 	* Endpoint (GET): https://zcinema-sales-microservice.herokuapp.com/api/sales/cards/ID_DO_USUARIO
 		
