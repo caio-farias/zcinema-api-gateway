@@ -76,8 +76,6 @@ module.exports = {
     
     
     try {
-      await testEndpoints(micserviceName, req, res)
-      
       const micserviceResponse = await axios({
         method: req.method,
         url: micserviceUrl + query,
@@ -98,6 +96,13 @@ module.exports = {
         shouldApplyRedundancy('bookings', micserviceName)
         ){
           await applyRedundancy(micserviceName, 'bookings', body.id, req, res)
+      }
+      
+      if (
+        isRedundancyMethod('sales', req.method) &&
+        shouldApplyRedundancy('sales', micserviceName)
+        ){
+          await applyRedundancy(micserviceName, 'sales', body.id, req, res)
       }
 
       return res.json({ ...body })
