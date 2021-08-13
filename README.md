@@ -190,3 +190,11 @@ yarn create-tmp
 ```
 * Deletar reserva de usuario:
 	* Endpoint (DELETE): https://zcinema-api-gateway.com/api/bookings/ID_DO_USUARIO/ID_DA_SESSÂO
+
+### Vendas
+* Cadastrar cartão de um usuário:
+	* Endpoint (POST): https://zcinema-sales-microservice.herokuapp.com/api/sales/cards/ID_DO_USUARIO
+
+* Ler cartões de um usuário:
+	* Endpoint (GET): https://zcinema-sales-microservice.herokuapp.com/api/sales/cards/ID_DO_USUARIO
+		
