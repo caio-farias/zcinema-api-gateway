@@ -205,3 +205,23 @@ yarn create-tmp
 * Ler cartões de um usuário:
 	* Endpoint (GET): https://zcinema-sales-microservice.herokuapp.com/api/sales/cards/ID_DO_USUARIO
 		
+* Adicionar crédito:
+	* Endpoint (POST): https://zcinema-sales-microservice.herokuapp.com/api/sales/credit/ID_DO_CARTAO
+```
+{
+  "value": 25.50,
+  "date": "2021-08-14"
+}
+```
+* Cadastrar compra de uma reserva utilizando um cartão de usuário:
+	* Endpoint (POST): https://zcinema-sales-microservice.herokuapp.com/api/sales/ID_DO_USUARIO/ID_DO_CARTAO/ID_DA_SESSAO
+```
+{
+  "price": 25.50,
+  "date": "2021-08-14",
+  "type": "Crédito"
+}
+```
+* Ler compras de cartões de um usuário:
+	* Endpoint (GET): https://zcinema-sales-microservice.herokuapp.com/api/sales/ID_DO_USUARIO
+
