@@ -202,3 +202,6 @@ yarn create-tmp
   "card_banner": "VISA"
 }
 ```
+* Ler cartões de um usuário:
+	* Endpoint (GET): https://zcinema-sales-microservice.herokuapp.com/api/sales/cards/ID_DO_USUARIO
+		
