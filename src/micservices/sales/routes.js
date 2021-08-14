@@ -2,7 +2,7 @@ const express = require('express')
 const routes = express.Router()
 const ApiGatewayController = require('../../api-gateway/ApiGatewayController')
 const ApiGatewayMiddleware = require('../../api-gateway/ApiGatewayMiddleware')
-const BookingMiddleware = require('../bookings/BookingMiddleware')
+const SalesMiddleware = require('../sales/SalesMiddleware')
 
 routes.post(
   '/api/sales/cards/:user_id', 
@@ -21,10 +21,10 @@ routes.get(
 )
 
 routes.post(
-  '/api/sales/:card_id/:booking_id', 
+  '/api/sales/:user_id/:card_id/:booking_id', 
   [
     ApiGatewayMiddleware.verifyRequest,
-    BookingMiddleware, 
+    SalesMiddleware, 
     ApiGatewayController.passFoward
   ]
 )
