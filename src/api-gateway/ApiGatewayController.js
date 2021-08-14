@@ -11,7 +11,6 @@ const applyRedundancy = async (micserviceName, redundancyService, redundancyId, 
   const query =  Object.keys(req.query).length > 0 ? ('?' + stringify(req.query)) : ''
 
   try {
-
     req.body.id = redundancyId
     if(micserviceName == 'users'){
       delete req.body.password
@@ -51,21 +50,21 @@ const applyRedundancy = async (micserviceName, redundancyService, redundancyId, 
   }
 }
 
-const  testEndpoints = async(micserviceName, req, res) => {
-  const hosts = [getMicServiceURL(micserviceName)]
-  if(
-    isRedundancyMethod('bookings', req.method) &&
-    shouldApplyRedundancy('bookings', micserviceName)
-    )
-      hosts.push(getMicServiceURL('bookings'))
-  try {
-    for(let host of hosts){
-      let res = await axios.get(host, { timeout: 5000 });
-    }    
-  } catch (error) {
-    console.log('VERFYING >> ', error) 
-  }
-}
+// const testEndpoints = async(micserviceName, req, res) => {
+//   const hosts = [getMicServiceURL(micserviceName)]
+//   if(
+//     isRedundancyMethod('bookings', req.method) &&
+//     shouldApplyRedundancy('bookings', micserviceName)
+//     )
+//       hosts.push(getMicServiceURL('bookings'))
+//   try {
+//     for(let host of hosts){
+//       let res = await axios.get(host, { timeout: 5000 });
+//     }    
+//   } catch (error) {
+//     console.log('VERFYING >> ', error) 
+//   }
+// }
 
 module.exports = {
   async passFoward (req, res){
@@ -76,8 +75,6 @@ module.exports = {
     
     
     try {
-      await testEndpoints(micserviceName, req, res)
-      
       const micserviceResponse = await axios({
         method: req.method,
         url: micserviceUrl + query,
@@ -98,6 +95,13 @@ module.exports = {
         shouldApplyRedundancy('bookings', micserviceName)
         ){
           await applyRedundancy(micserviceName, 'bookings', body.id, req, res)
+      }
+      
+      if (
+        isRedundancyMethod('sales', req.method) &&
+        shouldApplyRedundancy('sales', micserviceName)
+        ){
+          await applyRedundancy(micserviceName, 'sales', body.id, req, res)
       }
 
       return res.json({ ...body })
