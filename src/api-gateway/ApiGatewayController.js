@@ -11,7 +11,6 @@ const applyRedundancy = async (micserviceName, redundancyService, redundancyId, 
   const query =  Object.keys(req.query).length > 0 ? ('?' + stringify(req.query)) : ''
 
   try {
-
     req.body.id = redundancyId
     if(micserviceName == 'users'){
       delete req.body.password
@@ -51,57 +50,21 @@ const applyRedundancy = async (micserviceName, redundancyService, redundancyId, 
   }
 }
 
-const  testEndpoints = async(micserviceName, req, res) => {
-  const hosts = [getMicServiceURL(micserviceName)]
-  if(
-    isRedundancyMethod('bookings', req.method) &&
-    shouldApplyRedundancy('bookings', micserviceName)
-    )
-      hosts.push(getMicServiceURL('bookings'))
-  try {
-    for(let host of hosts){
-      let res = await axios.get(host, { timeout: 5000 });
-    }    
-  } catch (error) {
-    console.log('VERFYING >> ', error) 
-  }
-}
-
-const applyRedundancy = async (micserviceName, redundancyService, req, res) => {
-  const { reqPath } = req
-  const micserviceUrl = getMicServiceURL(redundancyService)
-    + `${reqPath != undefined ? `/${micserviceName}/` + reqPath : `/${micserviceName}`}`
-  const query =  Object.keys(req.query).length > 0 ? ('?' + stringify(req.query)) : ''
-  try {
-
-    if(micserviceName == 'users'){
-      delete req.body.password
-      delete req.body.avatar
-    } else if(micserviceName == 'movies'){
-      delete req.body.banner
-      delete req.body.trailer
-    }
-    console.log(micserviceUrl)
-    const micserviceResponse = await axios({
-      method: req.method,
-      url: micserviceUrl + query,
-      headers: {
-        'Authorization': secret,
-        'Content-Type': 'application/json',
-      },
-      data: req.body,
-      timeout: 3000,
-    })
-    const body = micserviceResponse.data
-    console.log(body) 
-  } catch (error) {
-    console.log(error)
-    const { message } = error.response.data || undefined
-    return res.status(400).json({ 
-      message : message || "Ocorreu um erro neste microsserviço, tente novamente."
-    })
-  }
-}
+// const testEndpoints = async(micserviceName, req, res) => {
+//   const hosts = [getMicServiceURL(micserviceName)]
+//   if(
+//     isRedundancyMethod('bookings', req.method) &&
+//     shouldApplyRedundancy('bookings', micserviceName)
+//     )
+//       hosts.push(getMicServiceURL('bookings'))
+//   try {
+//     for(let host of hosts){
+//       let res = await axios.get(host, { timeout: 5000 });
+//     }    
+//   } catch (error) {
+//     console.log('VERFYING >> ', error) 
+//   }
+// }
 
 module.exports = {
   async passFoward (req, res){
@@ -112,8 +75,6 @@ module.exports = {
     
     
     try {
-      await testEndpoints(micserviceName, req, res)
-      
       const micserviceResponse = await axios({
         method: req.method,
         url: micserviceUrl + query,
@@ -134,6 +95,13 @@ module.exports = {
         shouldApplyRedundancy('bookings', micserviceName)
         ){
           await applyRedundancy(micserviceName, 'bookings', body.id, req, res)
+      }
+      
+      if (
+        isRedundancyMethod('sales', req.method) &&
+        shouldApplyRedundancy('sales', micserviceName)
+        ){
+          await applyRedundancy(micserviceName, 'sales', body.id, req, res)
       }
 
       return res.json({ ...body })
