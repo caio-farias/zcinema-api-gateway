@@ -55,13 +55,13 @@ yarn create-tmp
        "email": "CAIO@email.com",
        "password": "123456"
     }
-    ```
+```
 ### Filmes
 
 * Cadatrar de filme:
     * Endpoint (POST): https://zcinema-api-gateway.herokuapp.com/api/movies
     * Body (Todos abaixo são obrigatórios): 
-    ```
+```
 	{
 		"title": "Nome do filme",
 		"description": "descrição",
@@ -71,14 +71,14 @@ yarn create-tmp
 		"schedules": ["18:30","23:30"],
 		"file": ARQUIVO DE IMAGEM.png/.jpeg/.jpg
  	}
-    ```
+```
 * Ler filme:
     * Endpoint (GET): https://zcinema-api-gateway.com/api/movies/ID_DO_FILME
 
 * Ler todos os filmes:
     * Endpoint (GET): https://zcinema-api-gateway.com/api/movies?title={TITULO_DO_FILME}&page=0&limit={QUANTIDADE_DE_FILMES}
     * Resposta:
-    ```
+```
 	    {
 	  "count": QUANTIDADE_DE_FILMES,
 	  "previous": "ENDPOINT_PARA_FILMES_ANTERIORES",
@@ -93,24 +93,24 @@ yarn create-tmp
 	      "end_date": "2021-08-04",
 	      "banner": "https://zcinema-api-gateway.herokuapp.com/uploads/movie-banners/1627786721407e58d0a44bbed89336e8cbabf83116090inception.jpeg",
 	      "sessions": [
-		"18:30",
-		"23:30"
+					"18:30",
+					"23:30"
 	      ],
 	      "createdAt": "2021-08-01T02:58:41.729Z",
 	      "updatedAt": "2021-08-01T02:58:41.729Z"
 	    }
 	  ]
 	}
-    ```
+```
 
 * Editar usuário:
     * Endpoint (PATCH): https://zcinema-api-gateway.herokuapp.com/api/movies/ID_DO_FILME
     * Body (campos que se deseja mudar): 
-    ```
+```
     {
 	    "title": "FILME TESTE"
     }
-    ```
+```
 * Deletar usuário:
     * Endpoint (DELETE): https://zcinema-api-gateway.herokuapp.com/api/movies/ID_DO_FILME
 
@@ -175,8 +175,6 @@ yarn create-tmp
 ```
 * Ler todas as reservas:
 	* Endpoint (GET): https://zcinema-api-gateway.com/api/bookings?data=DATA_DA_SESSAO&page=0&limit=QUANTIDADE_DE_SESSOES
-* Ler reserva po id:
-	* Endpoint (GET): https://zcinema-api-gateway.com/api/bookings/ID_DA_RESERVA
 * Ler todas as reservas/sessões de um usuário: 
 	* Endpoint (GET): https://zcinema-api-gateway.com/api/bookings/sessions/ID_DO_USUARIO
 * Ler uma reserva de usuário:
@@ -204,22 +202,3 @@ yarn create-tmp
   "card_banner": "VISA"
 }
 ```
-* Ler crédito de usuário:
-	* Endpoint(GET): https://zcinema-sales-microservice.herokuapp.com/api/sales/users/ID_DO_USUARIO
-* Ler cartões de um usuário:
-	* Endpoint (GET): https://zcinema-sales-microservice.herokuapp.com/api/sales/cards/ID_DO_USUARIO
-		
-* Adicionar crédito:
-	* Endpoint (POST): https://zcinema-sales-microservice.herokuapp.com/api/sales/credit/ID_DO_CARTAO
-	* Body:
-```
-{
-  "value": 25.50,
-}
-```
-* Pagar uma reserva em andamento utilizando um cartão de usuário:
-	* Endpoint (POST): https://zcinema-sales-microservice.herokuapp.com/api/sales/ID_DO_USUARIO/ID_DO_CARTAO/ID_DA_RESERVA
-
-* Ler revervas pagas de um usuário:
-	* Endpoint (GET): https://zcinema-sales-microservice.herokuapp.com/api/sales/ID_DO_USUARIO
-
