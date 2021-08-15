@@ -175,6 +175,8 @@ yarn create-tmp
 ```
 * Ler todas as reservas:
 	* Endpoint (GET): https://zcinema-api-gateway.com/api/bookings?data=DATA_DA_SESSAO&page=0&limit=QUANTIDADE_DE_SESSOES
+* Ler reserva po id:
+	* Endpoint (GET): https://zcinema-api-gateway.com/api/bookings/ID_DA_RESERVA
 * Ler todas as reservas/sessões de um usuário: 
 	* Endpoint (GET): https://zcinema-api-gateway.com/api/bookings/sessions/ID_DO_USUARIO
 * Ler uma reserva de usuário:
@@ -202,6 +204,22 @@ yarn create-tmp
   "card_banner": "VISA"
 }
 ```
+* Ler crédito de usuário:
+	* Endpoint(GET): https://zcinema-sales-microservice.herokuapp.com/api/sales/users/ID_DO_USUARIO
 * Ler cartões de um usuário:
 	* Endpoint (GET): https://zcinema-sales-microservice.herokuapp.com/api/sales/cards/ID_DO_USUARIO
 		
+* Adicionar crédito:
+	* Endpoint (POST): https://zcinema-sales-microservice.herokuapp.com/api/sales/credit/ID_DO_CARTAO
+	* Body:
+```
+{
+  "value": 25.50,
+}
+```
+* Pagar uma reserva em andamento utilizando um cartão de usuário:
+	* Endpoint (POST): https://zcinema-sales-microservice.herokuapp.com/api/sales/ID_DO_USUARIO/ID_DO_CARTAO/ID_DA_RESERVA
+
+* Ler revervas pagas de um usuário:
+	* Endpoint (GET): https://zcinema-sales-microservice.herokuapp.com/api/sales/ID_DO_USUARIO
+
