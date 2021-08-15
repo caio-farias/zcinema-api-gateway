@@ -4,6 +4,15 @@ const ApiGatewayController = require('../../api-gateway/ApiGatewayController')
 const ApiGatewayMiddleware = require('../../api-gateway/ApiGatewayMiddleware')
 const SalesMiddleware = require('../sales/SalesMiddleware')
 
+
+routes.get(
+  '/api/sales/users/:user_id', 
+  [
+    ApiGatewayMiddleware.verifyRequest,
+    ApiGatewayController.passFoward,
+  ]
+)
+
 routes.post(
   '/api/sales/cards/:user_id', 
   [
