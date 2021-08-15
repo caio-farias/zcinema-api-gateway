@@ -118,5 +118,38 @@ module.exports = {
       })
     }
   },
+  async passFowardAsMiddleware (req, res, next){
+    const { micserviceName, reqPath } = req
+    const micserviceUrl = getMicServiceURL(micserviceName) 
+     + `${reqPath != undefined ? '/' + reqPath : ''}`
+    const query =  Object.keys(req.query).length > 0  ? ('?' + stringify(req.query)) : ''
+    
+    
+    try {
+      const micserviceResponse = await axios({
+        method: req.method,
+        url: micserviceUrl + query,
+        headers: {
+          'Authorization': secret,
+          'Content-Type': 'application/json',
+        },
+        data: req.body,
+        timeout: 5000,
+      })
+      
+      next()
+    } catch (error) {
+      console.log(error)
+      if(error.response == undefined)
+        return res.status(400).json({ 
+          message: "Ocorreu um erro neste microsserviço, tente novamente." 
+        })
+
+      const { message } = error.response.data || undefined
+      return res.status(400).json({ 
+        message : message || "Ocorreu um erro neste microsserviço, tente novamente."
+      })
+    }
+  },
 }
 

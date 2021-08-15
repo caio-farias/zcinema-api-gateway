@@ -21,11 +21,20 @@ routes.get(
 )
 
 routes.post(
+  '/api/sales/credit/:card_id', 
+  [
+    ApiGatewayMiddleware.verifyRequest,
+    ApiGatewayController.passFoward
+  ]
+)
+
+routes.post(
   '/api/sales/:user_id/:card_id/:booking_id', 
   [
     ApiGatewayMiddleware.verifyRequest,
-    SalesMiddleware, 
-    ApiGatewayController.passFoward
+    SalesMiddleware.checkBooking, 
+    ApiGatewayController.passFowardAsMiddleware,
+    SalesMiddleware.confirmSale
   ]
 )
 routes.get(
