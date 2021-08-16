@@ -1,4 +1,26 @@
-const axios = require('./axios')
+const axiosBookings = require('./axiosBookings.js')
+const axiosSales = require('./axiosSales.js')
+const axiosReceipts = require('./axiosReceipts')
+
+const createReceipt = async (req, res, booking) => {
+  const { user_id, card_id } = req.params
+  const { sale } = req.resData
+  try {
+    const resultSales = await axiosSales.get(`/cards/${user_id}/${card_id}`)
+    const card = resultSales.data
+    await axiosReceipts.post(`/${user_id}`, {
+      user_id,
+      sale_info: sale,
+      card_info: card,
+      booking_info: booking,
+    })
+    
+    return res.json({ booking })
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json({ message: "Ocorreu um erro, tente novamente" })
+  }
+}
 
 module.exports = {
   async checkBooking (req, res, next){
@@ -12,7 +34,7 @@ module.exports = {
   
     
     try {
-      const result = await axios.get(`/${booking_id}`)
+      const result = await axiosBookings.get(`/${booking_id}`)
       const booking  = result.data
 
       if(!booking)
@@ -41,10 +63,11 @@ module.exports = {
   },
   async confirmSale (req, res){
     const { booking_id } = req.params
+
     try {
-      const result = await axios.post(`/${booking_id}`)
-      const booking = result.data
-      return res.json({ booking })
+      const resultBookings = await axiosBookings.post(`/${booking_id}`)
+      const booking = resultBookings.data
+      return await createReceipt(req, res, booking)
     } catch (error) {
       console.log(error)
       if(error == undefined)
@@ -54,5 +77,6 @@ module.exports = {
         message : message || "Ocorreu um erro neste microsserviço, tente novamente."
       })
     }
-  }
+  },
 }
+

@@ -23,6 +23,12 @@
       "methods": ["GET", "POST", "PATCH", "DELETE"],
       "redundancy": ["users"],
       "redundancy_methods": ["POST", "PATCH", "DELETE"]
+    },
+    "receipts":{
+      "url": "RECEIPTS_M_URL",
+      "methods": ["GET"],
+      "redundancy": ["users"],
+      "redundancy_methods": ["POST", "PATCH", "DELETE"]
     }
   }
 }
