@@ -104,6 +104,13 @@ module.exports = {
           await applyRedundancy(micserviceName, 'sales', body.id, req, res)
       }
 
+      if (
+        isRedundancyMethod('receipts', req.method) &&
+        shouldApplyRedundancy('receipts', micserviceName)
+        ){
+          await applyRedundancy(micserviceName, 'receipts', body.id, req, res)
+      }
+
       return res.json({ ...body })
     } catch (error) {
       console.log(error)
@@ -136,7 +143,7 @@ module.exports = {
         data: req.body,
         timeout: 5000,
       })
-      
+      req.resData = micserviceResponse.data
       next()
     } catch (error) {
       console.log(error)
